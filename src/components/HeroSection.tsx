@@ -1,8 +1,29 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { useAuth } from "@/hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 import heroImage from "@/assets/hero-image.jpg";
 
 const HeroSection = () => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  const handleQuizClick = () => {
+    if (user) {
+      navigate('/quiz');
+    } else {
+      navigate('/auth', { state: { from: { pathname: '/quiz' } } });
+    }
+  };
+
+  const handleExploreClick = () => {
+    if (user) {
+      navigate('/courses');
+    } else {
+      navigate('/auth', { state: { from: { pathname: '/courses' } } });
+    }
+  };
+
   return (
     <section className="relative min-h-[600px] flex items-center justify-center bg-gradient-hero overflow-hidden">
       <div className="absolute inset-0 bg-black/20"></div>
@@ -20,15 +41,15 @@ const HeroSection = () => {
               <Button 
                 size="lg" 
                 className="bg-white text-primary hover:bg-white/90 font-semibold px-8 py-3 text-lg shadow-hero"
-                onClick={() => console.log('Start quiz')}
+                onClick={handleQuizClick}
               >
                 Take Aptitude Quiz
               </Button>
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-white text-white hover:bg-white/10 px-8 py-3 text-lg"
-                onClick={() => console.log('Explore features')}
+                className="border-white/60 bg-white/10 text-white hover:bg-white/20 hover:border-white px-8 py-3 text-lg backdrop-blur-sm"
+                onClick={handleExploreClick}
               >
                 Explore Features
               </Button>

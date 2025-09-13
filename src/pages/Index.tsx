@@ -2,51 +2,65 @@ import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
 import FeatureCard from "@/components/FeatureCard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { BookOpen, Users, GraduationCap, DollarSign, Calendar, UserCircle, Target, TrendingUp, Award } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const Index = () => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  const handleFeatureClick = (route: string) => {
+    if (user) {
+      navigate(route);
+    } else {
+      navigate('/auth', { state: { from: { pathname: route } } });
+    }
+  };
+
   const features = [
     {
       icon: BookOpen,
       title: "Aptitude Assessment",
       description: "Discover your strengths and interests with our comprehensive aptitude quiz.",
       color: "primary" as const,
-      onClick: () => console.log('Navigate to quiz'),
+      onClick: () => handleFeatureClick('/quiz'),
     },
     {
       icon: GraduationCap,
       title: "Course Mapping",
       description: "Explore courses and their career prospects. From B.Sc to BBA, find your path.",
       color: "education" as const,
-      onClick: () => console.log('Navigate to courses'),
+      onClick: () => handleFeatureClick('/courses'),
     },
     {
       icon: Users,
       title: "College Directory",
       description: "Find colleges based on location, courses, cutoffs, and facilities.",
       color: "career" as const,
-      onClick: () => console.log('Navigate to colleges'),
+      onClick: () => handleFeatureClick('/colleges'),
     },    
     {
       icon: DollarSign,
       title: "Scholarships",
       description: "Discover scholarships with eligibility criteria, benefits, and deadlines.",
       color: "success" as const,
-      onClick: () => console.log('Navigate to scholarships'),
+      onClick: () => handleFeatureClick('/scholarships'),
     },
     {
       icon: Calendar,
       title: "Timeline Tracker",
       description: "Never miss important admission dates and scholarship deadlines.",
       color: "primary" as const,
-      onClick: () => console.log('Navigate to timeline'),
+      onClick: () => handleFeatureClick('/timeline'),
     },
     {
       icon: UserCircle,
       title: "Student Profile",
       description: "Create your profile and track your academic journey and interests.",
       color: "career" as const,
-      onClick: () => console.log('Navigate to profile'),
+      onClick: () => handleFeatureClick('/profile'),
     },
   ];
 
@@ -111,18 +125,21 @@ const Index = () => {
                 Join thousands of students who have found their perfect career path with CareerGuide.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button 
-                  className="bg-gradient-primary text-white px-8 py-3 rounded-lg font-semibold hover:shadow-hero transition-all duration-300"
-                  onClick={() => console.log('Create account')}
+                <Button 
+                  size="lg"
+                  className="bg-gradient-primary text-white hover:shadow-hero"
+                  onClick={() => handleFeatureClick('/profile')}
                 >
                   Create Your Profile
-                </button>
-                <button 
-                  className="border border-primary text-primary px-8 py-3 rounded-lg font-semibold hover:bg-primary hover:text-white transition-all duration-300"
-                  onClick={() => console.log('Take quiz')}
+                </Button>
+                <Button 
+                  size="lg"
+                  variant="outline"
+                  className="border-primary text-primary hover:bg-primary hover:text-white"
+                  onClick={() => handleFeatureClick('/quiz')}
                 >
                   Take Free Assessment
-                </button>
+                </Button>
               </div>
             </CardContent>
           </Card>
