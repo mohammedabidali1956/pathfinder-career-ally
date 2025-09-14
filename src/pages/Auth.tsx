@@ -34,51 +34,81 @@ const Auth = () => {
     setIsLoading(true);
 
     try {
-      let error;
-      
       if (isSignUp) {
         if (!fullName.trim()) {
           toast({
             title: "Error",
             description: "Please enter your full name",
-            variant: "destructive"
+            variant: "destructive",
           });
           setIsLoading(false);
           return;
         }
-        const result = await signUp(email, password, fullName);
-        error = result.error;
-        
-        if (!error) {
+
+        const { error } = await signUp(email, password, fullName);
+        if (error) {
+          let errorMessage = error.message;
+          
+          // Handle specific error cases
+          if (error.message.includes('User already registered')) {
+            errorMessage = "This email is already registered. Please try signing in instead.";
+            setIsSignUp(false); // Switch to sign in mode
+          } else if (error.message.includes('Password should be at least 6 characters')) {
+            errorMessage = "Password must be at least 6 characters long.";
+          } else if (error.message.includes('Invalid email')) {
+            errorMessage = "Please enter a valid email address.";
+          } else if (error.message.includes('Signup is disabled')) {
+            errorMessage = "Account creation is currently disabled. Please contact support.";
+          }
+          
           toast({
-            title: "Success!",
-            description: "Account created successfully. Please check your email to verify your account.",
+            title: "Sign Up Failed",
+            description: errorMessage,
+            variant: "destructive",
           });
+        } else {
+          toast({
+            title: "Account Created Successfully!",
+            description: "You can now sign in with your credentials. Check your email if confirmation is required.",
+          });
+          // Switch to sign in mode after successful sign up
+          setIsSignUp(false);
+          setFullName('');
         }
       } else {
-        const result = await signIn(email, password);
-        error = result.error;
-        
-        if (!error) {
+        const { error } = await signIn(email, password);
+        if (error) {
+          let errorMessage = error.message;
+          
+          // Handle specific error cases
+          if (error.message.includes('Invalid login credentials')) {
+            errorMessage = "Invalid email or password. Please check your credentials and try again.";
+          } else if (error.message.includes('Email not confirmed')) {
+            errorMessage = "Please check your email and click the confirmation link before signing in.";
+          } else if (error.message.includes('Too many requests')) {
+            errorMessage = "Too many login attempts. Please wait a moment before trying again.";
+          } else if (error.message.includes('User not found')) {
+            errorMessage = "No account found with this email. Please sign up first.";
+          }
+          
+          toast({
+            title: "Sign In Failed",
+            description: errorMessage,
+            variant: "destructive",
+          });
+        } else {
           toast({
             title: "Welcome back!",
-            description: "Successfully signed in to your account.",
+            description: "You have successfully signed in",
           });
         }
       }
-
-      if (error) {
-        toast({
-          title: "Error",
-          description: error.message || "An error occurred",
-          variant: "destructive"
-        });
-      }
-    } catch (err) {
+    } catch (error) {
+      console.error('Authentication error:', error);
       toast({
         title: "Error",
-        description: "An unexpected error occurred",
-        variant: "destructive"
+        description: "Something went wrong. Please try again.",
+        variant: "destructive",
       });
     } finally {
       setIsLoading(false);
@@ -168,7 +198,14 @@ const Auth = () => {
               className="w-full bg-primary hover:bg-primary-hover text-primary-foreground"
               disabled={isLoading}
             >
-              {isLoading ? 'Loading...' : (isSignUp ? 'Create Account' : 'Sign In')}
+              {isLoading ? (
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin"></div>
+                  {isSignUp ? 'Creating Account...' : 'Signing In...'}
+                </div>
+              ) : (
+                isSignUp ? 'Create Account' : 'Sign In'
+              )}
             </Button>
           </form>
           
