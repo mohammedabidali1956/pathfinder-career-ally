@@ -38,6 +38,54 @@ export type Database = {
         }
         Relationships: []
       }
+      user_profiles: {
+        Row: {
+          academic_interests: string[] | null
+          age: number | null
+          class_level: string | null
+          created_at: string
+          full_name: string | null
+          gender: string | null
+          id: string
+          location: string | null
+          phone: string | null
+          preferences: Json | null
+          quiz_results: Json | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          academic_interests?: string[] | null
+          age?: number | null
+          class_level?: string | null
+          created_at?: string
+          full_name?: string | null
+          gender?: string | null
+          id?: string
+          location?: string | null
+          phone?: string | null
+          preferences?: Json | null
+          quiz_results?: Json | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          academic_interests?: string[] | null
+          age?: number | null
+          class_level?: string | null
+          created_at?: string
+          full_name?: string | null
+          gender?: string | null
+          id?: string
+          location?: string | null
+          phone?: string | null
+          preferences?: Json | null
+          quiz_results?: Json | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

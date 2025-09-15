@@ -10,6 +10,7 @@ import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import Quiz from "./pages/Quiz";
 import Courses from "./pages/Courses";
+import Roadmap from "./pages/Roadmap";
 import Colleges from "./pages/Colleges";
 import Scholarships from "./pages/Scholarships";
 import Timeline from "./pages/Timeline";
@@ -33,16 +34,9 @@ const App = () => (
                 <Quiz />
               </ProtectedRoute>
             } />
-            <Route path="/courses" element={
-              <ProtectedRoute>
-                <Courses />
-              </ProtectedRoute>
-            } />
-            <Route path="/colleges" element={
-              <ProtectedRoute>
-                <Colleges />
-              </ProtectedRoute>
-            } />
+            <Route path="/courses" element={<ProtectedRoute><Courses /></ProtectedRoute>} />
+            <Route path="/roadmap/:course" element={<ProtectedRoute><Roadmap /></ProtectedRoute>} />
+            <Route path="/colleges" element={<ProtectedRoute><Colleges /></ProtectedRoute>} />
             <Route path="/scholarships" element={
               <ProtectedRoute>
                 <Scholarships />

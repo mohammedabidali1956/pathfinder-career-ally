@@ -40,7 +40,41 @@ const Navigation = () => {
             ))}
           </div>
 
-          <Button className="md:hidden">Menu</Button>
+          <Button 
+            className="md:hidden"
+            variant="ghost"
+            onClick={() => {
+              const mobileNav = document.getElementById('mobile-nav');
+              if (mobileNav) {
+                mobileNav.classList.toggle('hidden');
+              }
+            }}
+          >
+            Menu
+          </Button>
+        </div>
+        
+        {/* Mobile Navigation */}
+        <div id="mobile-nav" className="hidden md:hidden mt-4">
+          <div className="flex flex-col space-y-2">
+            {navigationItems.map((item) => (
+              <Button
+                key={item.label}
+                variant="ghost"
+                className="justify-start"
+                onClick={() => {
+                  navigate(item.href);
+                  const mobileNav = document.getElementById('mobile-nav');
+                  if (mobileNav) {
+                    mobileNav.classList.add('hidden');
+                  }
+                }}
+              >
+                <item.icon className="h-4 w-4 mr-2" />
+                <span>{item.label}</span>
+              </Button>
+            ))}
+          </div>
         </div>
       </div>
     </nav>
