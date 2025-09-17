@@ -1,4 +1,4 @@
-User-agent: Googlebot
+/*User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
@@ -12,3 +12,48 @@ Allow: /
 
 User-agent: *
 Allow: /
+*/
+
+# ===============================
+# Robots.txt for Career Advisor App
+# ===============================
+
+# Allow major search and social bots to index public pages
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+# Apply rules to ALL other bots
+User-agent: *
+
+# ✅ Allow these sections (public)
+Allow: /$
+Allow: /courses
+Allow: /roadmap
+Allow: /colleges
+Allow: /scholarships
+
+# 🚫 Disallow sensitive/private sections
+Disallow: /admin
+Disallow: /dashboard
+Disallow: /api
+Disallow: /login
+Disallow: /register
+Disallow: /profile
+Disallow: /settings
+Disallow: /dist
+Disallow: /node_modules
+Disallow: /private
+
+# ===============================
+# Sitemap for better crawling
+# ===============================
+Sitemap: https://<your-domain>/sitemap.xml
