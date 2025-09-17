@@ -48,6 +48,7 @@ npm install
 
 # Step 4: Start development server
 npm run dev
+```
 
 The app will now be running at:
 👉 http://localhost:5173/
