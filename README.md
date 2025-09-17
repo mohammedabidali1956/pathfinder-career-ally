@@ -1,73 +1,126 @@
-# Welcome to your Lovable project
 
-## Project info
+# 🎓 One-Stop Personalized Career & Education Advisor  
 
-**URL**: https://lovable.dev/projects/46c865d6-a12c-44da-bfee-ba50ce48df79
+## 📌 About the Project  
+The **Career & Education Advisor** is a web + mobile application designed to help students make informed academic and career decisions after Class 10 and 12.  
 
-## How can I edit this code?
+Many students face confusion about:  
+- Which stream (Science, Commerce, Arts, Vocational) to choose  
+- What degree programs are available in nearby government colleges  
+- Career and higher education opportunities after each course  
+- Scholarship and admission timelines  
 
-There are several ways of editing your application.
+This project bridges that gap by acting as a **personalized one-stop career and education guidance platform**.  
 
-**Use Lovable**
+---
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/46c865d6-a12c-44da-bfee-ba50ce48df79) and start prompting.
+## 🚀 Features  
+- **Aptitude Test** – Interest & skill-based quiz to recommend suitable streams  
+- **Course-to-Career Mapping** – Visual roadmaps from courses to career opportunities  
+- **College Directory** – Explore government colleges with official website links  
+- **Scholarship & Admission Tracker** – Stay updated on important dates and deadlines  
+- **Personalized Profiles** – User-specific recommendations based on interests & academics  
 
-Changes made via Lovable will be committed automatically to this repo.
+---
 
-**Use your preferred IDE**
+## 🛠️ Tech Stack  
+- **Frontend:** React, TypeScript, Tailwind CSS, shadcn-ui  
+- **Backend:** Node.js / Django (custom integration possible)  
+- **Database:** PostgreSQL / Supabase / Firebase  
+- **Build Tool:** Vite  
+- **Deployment:** Cloud hosting (Vercel, Netlify, Firebase, etc.)  
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+---
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## 📥 Installation  
 
-Follow these steps:
+Follow these steps to set up the project locally:  
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# Step 1: Clone the repository
+git clone <YOUR_REPO_URL>
 
-# Step 2: Navigate to the project directory.
+# Step 2: Navigate into the project
 cd <YOUR_PROJECT_NAME>
 
-# Step 3: Install the necessary dependencies.
-npm i
+# Step 3: Install dependencies
+npm install
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Step 4: Start development server
 npm run dev
-```
 
-**Edit a file directly in GitHub**
+The app will now be running at:
+👉 http://localhost:5173/
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
 
-**Use GitHub Codespaces**
+---
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+📦 Deployment
 
-## What technologies are used for this project?
+To deploy the project:
 
-This project is built with:
+1. Build the app:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+npm run build
 
-## How can I deploy this project?
 
-Simply open [Lovable](https://lovable.dev/projects/46c865d6-a12c-44da-bfee-ba50ce48df79) and click on Share -> Publish.
+2. Deploy the generated dist/ folder to any hosting service like:
 
-## Can I connect a custom domain to my Lovable project?
+Vercel
 
-Yes, you can!
+Netlify
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+Firebase Hosting
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Your own server
+
+
+
+
+
+---
+
+🎯 Usage
+
+1. Create a profile with your academic details.
+
+
+2. Take the aptitude test to discover recommended streams.
+
+
+3. Explore course-to-career maps with higher studies & job opportunities.
+
+
+4. Browse the college directory and check official websites.
+
+
+5. Track admission dates and scholarships with notifications.
+
+
+
+
+---
+
+🤝 Contribution
+
+Contributions are welcome! To contribute:
+
+Fork the repository
+
+Create a new feature branch (git checkout -b feature-name)
+
+Commit your changes (git commit -m "Added new feature")
+
+Push to the branch (git push origin feature-name)
+
+Open a Pull Request
+
+
+
+---
+
+📄 License
+
+This project is developed under the Smart India Hackathon 2025 (SIH) initiative, under the theme Smart Education.
+
+
