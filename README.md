@@ -51,7 +51,7 @@ npm run dev
 ```
 
 The app will now be running at:
-👉 http://localhost:5173/
+👉 ```http://localhost:5173/```
 
 
 ---
@@ -62,7 +62,7 @@ To deploy the project:
 
 1. Build the app:
 
-npm run build
+```npm run build```
 
 
 2. Deploy the generated dist/ folder to any hosting service like:
