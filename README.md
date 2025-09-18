@@ -1,4 +1,4 @@
-## This project is developed for the Smart India Hackathon 2025 (SIH) initiative, under the theme Smart Education.
+### This project is developed for the Smart India Hackathon 2025 (SIH) initiative, under the theme Smart Education.
 # 🎓 One-Stop Personalized Career & Education Advisor  
 
 ## 📌 About the Project  
