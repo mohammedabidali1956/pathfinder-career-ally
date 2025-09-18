@@ -25,8 +25,8 @@ This project bridges that gap by acting as a **personalized one-stop career and 
 
 ## 🛠️ Tech Stack  
 - **Frontend:** React, TypeScript, Tailwind CSS, shadcn-ui  
-- **Backend:** Node.js / Django (custom integration possible)  
-- **Database:** PostgreSQL / Supabase / Firebase  
+- **Backend:** Node.js  (custom integration possible)  
+- **Database:**  Supabase 
 - **Build Tool:** Vite  
 - **Deployment:** Cloud hosting (Vercel, Netlify, Firebase, etc.)  
 
