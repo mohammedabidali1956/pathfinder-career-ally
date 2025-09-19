@@ -7,11 +7,18 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useState } from "react";
-import { Plus, Upload, Download, Edit2, Trash2, School, DollarSign, Calendar, Users, Settings } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Plus, Upload, Download, Edit2, Trash2, School, DollarSign, Calendar, Users, Settings, Shield } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/components/ui/use-toast";
 
 const Admin = () => {
+  const { user, loading } = useAuth();
+  const { toast } = useToast();
   const [activeTab, setActiveTab] = useState("colleges");
+  const [userRole, setUserRole] = useState<string | null>(null);
+  const [roleLoading, setRoleLoading] = useState(true);
 
   // Sample data for admin management
   const [colleges, setColleges] = useState([
@@ -45,6 +52,39 @@ const Admin = () => {
     website: ""
   });
 
+  // Check user role on component mount
+  useEffect(() => {
+    const checkUserRole = async () => {
+      if (!user) {
+        setRoleLoading(false);
+        return;
+      }
+
+      try {
+        const { data, error } = await supabase
+          .from('profiles')
+          .select('role')
+          .eq('user_id', user.id)
+          .single();
+
+        if (error) throw error;
+        setUserRole(data?.role || 'user');
+      } catch (error) {
+        console.error('Error checking user role:', error);
+        toast({
+          title: "Error",
+          description: "Failed to verify admin access",
+          variant: "destructive"
+        });
+        setUserRole('user');
+      } finally {
+        setRoleLoading(false);
+      }
+    };
+
+    checkUserRole();
+  }, [user, toast]);
+
   const handleAddCollege = () => {
     if (newCollege.name && newCollege.location) {
       const college = {
@@ -56,7 +96,10 @@ const Admin = () => {
       };
       setColleges([...colleges, college]);
       setNewCollege({ name: "", location: "", type: "Government", courses: "", fees: "", cutoff: "", facilities: "", website: "" });
-      console.log('College added:', college);
+      toast({
+        title: "Success",
+        description: "College added successfully"
+      });
     }
   };
 
@@ -71,19 +114,63 @@ const Admin = () => {
       };
       setScholarships([...scholarships, scholarship]);
       setNewScholarship({ name: "", provider: "", amount: "", deadline: "", eligibility: "", description: "", website: "" });
-      console.log('Scholarship added:', scholarship);
+      toast({
+        title: "Success",
+        description: "Scholarship added successfully"
+      });
     }
   };
 
   const deleteCollege = (id: number) => {
     setColleges(colleges.filter(c => c.id !== id));
-    console.log('College deleted:', id);
+    toast({
+      title: "Success",
+      description: "College deleted successfully"
+    });
   };
 
   const deleteScholarship = (id: number) => {
     setScholarships(scholarships.filter(s => s.id !== id));
-    console.log('Scholarship deleted:', id);
+    toast({
+      title: "Success", 
+      description: "Scholarship deleted successfully"
+    });
   };
+
+  // Show loading state
+  if (loading || roleLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-card flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
+
+  // Show access denied for non-admin users
+  if (!user || userRole !== 'admin') {
+    return (
+      <div className="min-h-screen bg-gradient-card">
+        <Navigation />
+        <div className="container mx-auto px-4 py-8">
+          <div className="max-w-2xl mx-auto text-center">
+            <Card className="shadow-card">
+              <CardContent className="p-8">
+                <Shield className="h-16 w-16 mx-auto mb-4 text-destructive" />
+                <h1 className="text-2xl font-bold mb-4">Access Denied</h1>
+                <p className="text-muted-foreground mb-6">
+                  You don't have permission to access the admin panel. 
+                  This area is restricted to administrators only.
+                </p>
+                <Button onClick={() => window.history.back()}>
+                  Go Back
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-card">
