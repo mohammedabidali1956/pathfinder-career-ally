@@ -126,7 +126,7 @@ This project is developed under the Smart India Hackathon 2025 (SIH) initiative,
 
 
 
-##Disclaimer:
+## Disclaimer:
 The information about colleges, courses, fees, and admissions has been collected from official college websites, government portals, and publicly available resources.  
 Our platform does not claim ownership of this data and is intended solely for educational and informational purposes.  
 Students are advised to verify details from the official college websites before making decisions.
