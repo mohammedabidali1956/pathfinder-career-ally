@@ -23,7 +23,7 @@ This project bridges that gap by acting as a **personalized one-stop career and 
 
 ---
 
-## 🛠️ Tech Stack  
+## 🛠️ Tech Stacks 
 - **Frontend:** React, TypeScript, Tailwind CSS, shadcn-ui  
 - **Backend:** Node.js  (custom integration possible)  
 - **Database:**  Supabase 
